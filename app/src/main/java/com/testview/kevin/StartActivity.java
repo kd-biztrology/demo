@@ -11,7 +11,7 @@ import com.testview.kevin.activity.activitylikedilog.Dilog;
 import com.testview.kevin.activity.ondragActivity.OnDragActivity;
 import com.testview.kevin.activity.viewpagerfragemnt.MainActivity;
 import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
-import com.testview.kevin.activity.cutoutpic.CutOutPicActivity;
+import com.testview.kevin.activity.cutoutpic.ZipPicActivity;
 
 /**
  * Created by kevin.
@@ -67,7 +67,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(new Intent(StartActivity.this, CreateQrcodeActivity.class));
                 break;
             case R.id.takepic:
-                startActivity(new Intent(StartActivity.this, CutOutPicActivity.class));
+                startActivity(new Intent(StartActivity.this, ZipPicActivity.class));
                 break;
             case R.id.pic:
                 startActivity(new Intent(StartActivity.this, Dilog.class));

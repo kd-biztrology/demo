@@ -22,12 +22,12 @@ import com.testview.kevin.utils.logger.Logger;
 /**
  * Created by kevin.
  */
-public class CutOutPicActivity extends BaseActivity implements View.OnClickListener {
-    private static final String TAG = CutOutPicActivity.class.getSimpleName();
+public class ZipPicActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = ZipPicActivity.class.getSimpleName();
     private ImageView mImageView;
     private TextView mBtnupdate;
     private TextView mBtnCancel;
-    private Context mContext = CutOutPicActivity.this;
+    private Context mContext = ZipPicActivity.this;
 
     private SeletePicPopWindow mPopWindow;
     public static final int REQUEST_TAKE_PHOTO = 1;//拍照
@@ -41,7 +41,7 @@ public class CutOutPicActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cut_out_pic_activity);
+        setContentView(R.layout.zip_pic_activity);
         initView();
         addListener();
     }

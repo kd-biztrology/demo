@@ -15,6 +15,7 @@ import com.google.zxing.common.BitMatrix;
 
 import java.util.Hashtable;
 
+//生成二维码
 public class CreateQRCodeUtil {
 
     private static final int BLACK = 0xff000000;

@@ -21,7 +21,7 @@ public class CreateQRCodeUtil {
 
     public static Bitmap getCreateQrCode(String str, int widthAndHeight, String resname, String tableid) throws WriterException {
 
-        Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
+        Hashtable<EncodeHintType, String> hints = new Hashtable<>();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         BitMatrix matrix = new MultiFormatWriter().encode("http://www.lokobee.com/?table_id=" + str,
                 BarcodeFormat.QR_CODE, widthAndHeight, widthAndHeight);

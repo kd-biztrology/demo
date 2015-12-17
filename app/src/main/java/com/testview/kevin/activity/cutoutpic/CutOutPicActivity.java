@@ -1,27 +1,23 @@
 package com.testview.kevin.activity.cutoutpic;
 
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.testview.kevin.R;
-import com.testview.kevin.StartActivity;
 import com.testview.kevin.activity.BaseActivity;
-import com.testview.kevin.utils.Base64Utils;
+import com.testview.kevin.utils.PictureUtils;
 import com.testview.kevin.utils.logger.Logger;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by kevin.
@@ -33,12 +29,14 @@ public class CutOutPicActivity extends BaseActivity implements View.OnClickListe
     private TextView mBtnCancel;
     private Context mContext = CutOutPicActivity.this;
 
-
-    public static final int NONE = 0;
-    public static final int PHOTOHRAPH = 1;// 拍照
-    public static final int PHOTOZOOM = 2; // 缩放
-    public static final int PHOTORESOULT = 3;// 结果
+    private SeletePicPopWindow mPopWindow;
+    public static final int REQUEST_TAKE_PHOTO = 1;//拍照
+    public static final int REQUEST_TAKE_PHOTO_ZOOM = 2;//相册
+    public Uri photoUir;
+    //获取到的图片路径
+    private String picPath = "";
     public static final String IMAGE_UNSPECIFIED = "image/*";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,124 +61,110 @@ public class CutOutPicActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_update:
-                takepic(v);
-                break;
-            case R.id.btn_cancel:
-                startActivity(new Intent(CutOutPicActivity.this, StartActivity.class));
-                finish();
+                mPopWindow = new SeletePicPopWindow(mContext, mListener);
+                mPopWindow.showAtLocation(findViewById(R.id.update), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             default:
                 break;
         }
     }
 
-    //拍照的方法
-    private void takepic(View v) {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(v.getContext());
-        builder.setItems(new String[]{"相册", "拍照"}, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    showPhotoZoom();
-                } else if (which == 1) {
-                    showPhotoHraph();
-                }
-                dialog.dismiss();
+    //弹出框实现的监听
+    private View.OnClickListener mListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mPopWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.takePhoto://拍照
+                    takePhoto();
+                    break;
+                case R.id.picZoom://相册
+                    takePhotZooom();
+                    break;
+                default:
+                    break;
             }
-        }).show();
+        }
+
+    };
+
+    //相册
+    private void takePhotZooom() {
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
+        startActivityForResult(intent, REQUEST_TAKE_PHOTO_ZOOM);
     }
 
     //拍照
-    private void showPhotoHraph() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg")));
-        startActivityForResult(intent, PHOTOHRAPH);
+    private void takePhoto() {
+        //
+        String SDCardstart = Environment.getExternalStorageState();
+        if (SDCardstart.equals(Environment.MEDIA_MOUNTED)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            //
+            ContentValues values = new ContentValues();
+            photoUir = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUir);
+            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+        } else {
+            Toast.makeText(mContext, "sdk is not found", Toast.LENGTH_LONG).show();
+        }
     }
-
-    //相册选取
-    private void showPhotoZoom() {
-        Intent intent = new Intent(Intent.ACTION_PICK, null);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
-        startActivityForResult(intent, PHOTOZOOM);
-    }
-
-    //处理图片
-    public void startPhotoZoom(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, IMAGE_UNSPECIFIED);
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 360);
-        intent.putExtra("outputY", 360);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, PHOTORESOULT);
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //点击取消
+        if (requestCode == RESULT_CANCELED) {
+            return;
+        }
+        //处理不同的选择方式
+        switch (requestCode) {
+            case REQUEST_TAKE_PHOTO_ZOOM://相册
+                doPhoto(requestCode, data);
+                break;
+            case REQUEST_TAKE_PHOTO://相机
+                doPhoto(requestCode, data);
+                break;
+        }
         super.onActivityResult(requestCode, resultCode, data);
-        final Bitmap photo;
-        if (resultCode == NONE) {
-            return;
-        }
-        // 拍照
-        if (requestCode == PHOTOHRAPH) {
-            //设置文件保存路径这里放在跟目录下
-            File picture = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
-            startPhotoZoom(Uri.fromFile(picture));
-        }
-        if (data == null) {
-            return;
-        }
-        // 读取相册缩放图片
-        if (requestCode == PHOTOZOOM) {
-            startPhotoZoom(data.getData());
-        }
-        // 处理结果
-        if (requestCode == PHOTORESOULT) {
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                photo = extras.getParcelable("data");
-                //预览
-                mImageView.setImageBitmap(photo);
-                if (photo != null) {
-                    mBtnupdate.setText("update");
-                    mBtnupdate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // 上传裁剪以后的图片
-                            Toast.makeText(mContext, "update", Toast.LENGTH_LONG).show();
-                            uploadBitmap(photo);
-                        }
-                    });
-                }
-            }
-        }
     }
 
-    //上传图片
-    private void uploadBitmap(final Bitmap photo) {
-        if (photo != null) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            photo.recycle();
-            byte[] photodata = baos.toByteArray();
-            if (baos != null) {
-                try {
-                    baos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    //处理图片压缩
+    private void doPhoto(int requestCode, Intent data) {
+        if (requestCode == REQUEST_TAKE_PHOTO_ZOOM) {
+            if (data == null) {
+                Toast.makeText(this, "select pic is error", Toast.LENGTH_LONG).show();
+                return;
             }
-            String Base64 = Base64Utils.base64BitmapToString(photo, 100);
-            Logger.t(TAG).d(Base64);
-            //update photo to data
+            photoUir = data.getData();
+            if (photoUir == null) {
+                Toast.makeText(this, "select pic is error", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
+        String[] pojo = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = mContext.getContentResolver().query(photoUir, pojo, null, null, null);
+        if (cursor != null) {
+            int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
+            cursor.moveToFirst();
+            picPath = cursor.getString(columnIndex);
+            cursor.close();
+        }
+        //上传
+        if (picPath != null && (picPath.endsWith(".png") || picPath.endsWith(".PNG")
+                || picPath.endsWith(".jpg") || picPath.endsWith(".JPG"))) {
+            //设置预览
+            mImageView.setImageBitmap(PictureUtils.getSmallBitmap(picPath));
+            //转换图片为Base64
+            String base64pic = PictureUtils.bitmapToString(picPath);
+            Logger.t(TAG).d(base64pic);
+
+            //其他操作
+
+
+        } else {
+            Toast.makeText(this, "file is error", Toast.LENGTH_LONG).show();
+        }
+
     }
-
-
 }

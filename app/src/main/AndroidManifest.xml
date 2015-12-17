@@ -57,8 +57,9 @@
         <activity android:name=".activity.viewpagerfragemnt.MainActivity"/>
         <activity android:name=".activity.ondragActivity.OnDragActivity"/>
         <activity android:name=".activity.createqrcode.CreateQrcodeActivity"/>
-        <activity android:name=".activity.cutoutpic.ZipPicActivity"/>
-        <activity android:name=".activity.activitylikedilog.Dilog"/>
+        <activity android:name=".activity.zippicture.ZipPicActivity"/>
+        <activity android:name=".activity.activitylikedilog.Dilog"
+            />
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ import com.testview.kevin.activity.activitylikedilog.Dilog;
 import com.testview.kevin.activity.ondragActivity.OnDragActivity;
 import com.testview.kevin.activity.viewpagerfragemnt.MainActivity;
 import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
-import com.testview.kevin.activity.cutoutpic.ZipPicActivity;
+import com.testview.kevin.activity.zippicture.ZipPicActivity;
 
 /**
  * Created by kevin.

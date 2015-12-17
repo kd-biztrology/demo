@@ -1,4 +1,4 @@
-package com.testview.kevin.activity.cutoutpic;
+package com.testview.kevin.activity.zippicture;
 
 import android.content.ContentValues;
 import android.content.Context;

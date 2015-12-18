@@ -150,17 +150,16 @@ public class ZipPicActivity extends BaseActivity implements View.OnClickListener
             picPath = cursor.getString(columnIndex);
             cursor.close();
         }
-        //上传
+
         if (picPath != null && (picPath.endsWith(".png") || picPath.endsWith(".PNG")
                 || picPath.endsWith(".jpg") || picPath.endsWith(".JPG"))) {
             //设置预览
             mImageView.setImageBitmap(PictureUtils.getSmallBitmap(picPath));
             //转换图片为Base64
+
             String base64pic = PictureUtils.bitmapToString(picPath);
             //  Logger.t(TAG).d(base64pic);
-
-            //其他操作
-
+            //上传
 
         } else {
             Toast.makeText(this, "file is error", Toast.LENGTH_LONG).show();

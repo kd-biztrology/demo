@@ -6,8 +6,6 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.util.Base64;
 
-import com.testview.kevin.utils.logger.Logger;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -17,7 +15,6 @@ import java.io.IOException;
 public class PictureUtils {
 
     private static final String TAG = PictureUtils.class.getSimpleName();
-
     /**
      * 根据路径获取图片，返回bitmap用于显示预览
      *
@@ -132,5 +129,4 @@ public class PictureUtils {
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizedBitmap;
     }
-
 }

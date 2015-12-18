@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.testview.kevin.R;
 import com.testview.kevin.activity.BaseActivity;
 import com.testview.kevin.utils.PictureUtils;
-import com.testview.kevin.utils.logger.Logger;
 
 /**
  * Created by kevin.
@@ -32,6 +31,7 @@ public class ZipPicActivity extends BaseActivity implements View.OnClickListener
     private SeletePicPopWindow mPopWindow;
     public static final int REQUEST_TAKE_PHOTO = 1;//拍照
     public static final int REQUEST_TAKE_PHOTO_ZOOM = 2;//相册
+    public static final int REQUEST_TAKE_PHOTO_CUT = 2;//相册
     public Uri photoUir;
     //获取到的图片路径
     private String picPath = "";
@@ -157,7 +157,7 @@ public class ZipPicActivity extends BaseActivity implements View.OnClickListener
             mImageView.setImageBitmap(PictureUtils.getSmallBitmap(picPath));
             //转换图片为Base64
             String base64pic = PictureUtils.bitmapToString(picPath);
-          //  Logger.t(TAG).d(base64pic);
+            //  Logger.t(TAG).d(base64pic);
 
             //其他操作
 
@@ -165,6 +165,6 @@ public class ZipPicActivity extends BaseActivity implements View.OnClickListener
         } else {
             Toast.makeText(this, "file is error", Toast.LENGTH_LONG).show();
         }
-
     }
+
 }

@@ -12,6 +12,7 @@ import com.testview.kevin.R;
 import com.testview.kevin.activity.BaseActivity;
 import com.testview.kevin.adapter.dragadapter.OnDragAdapter;
 import com.testview.kevin.adapter.dragadapter.OnDragsItemTouchHelperCallback;
+import com.testview.kevin.wights.explosion.ExplosionField;
 
 /**
  * Created by kevin.
@@ -23,11 +24,12 @@ public class OnDragActivity extends BaseActivity implements OnDragsItemTouchHelp
     public ItemTouchHelper mItemTouchHelper;
     private Context mContext = OnDragActivity.this;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ondrag_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ////////
         initView();
         //set recyclview
@@ -43,8 +45,8 @@ public class OnDragActivity extends BaseActivity implements OnDragsItemTouchHelp
         mDragAdapter.setOnItemClickLitener(new OnDragAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(mContext, position + " delete",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, position + " delete", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

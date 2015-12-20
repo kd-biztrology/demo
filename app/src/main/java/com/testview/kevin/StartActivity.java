@@ -8,9 +8,9 @@ import android.widget.Button;
 import com.testview.kevin.activity.BaseActivity;
 import com.testview.kevin.activity.HidingScrollToolbar.HidingScrollToolbarActivity;
 import com.testview.kevin.activity.activitylikedilog.Dilog;
+import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
 import com.testview.kevin.activity.ondragActivity.OnDragActivity;
 import com.testview.kevin.activity.viewpagerfragemnt.MainActivity;
-import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
 import com.testview.kevin.activity.zippicture.ZipPicActivity;
 
 /**
@@ -23,6 +23,14 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
     private Button createqr;
     private Button takepic;
     private Button pic;
+   // private Button test;
+
+
+    ////
+  //  private ExplosionField mExplosionField;
+
+    /////
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         createqr = (Button) findViewById(R.id.createqr);
         takepic = (Button) findViewById(R.id.takepic);
         pic = (Button) findViewById(R.id.pic);
+       // test = (Button) findViewById(R.id.test);
 
     }
 
@@ -49,6 +58,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         createqr.setOnClickListener(this);
         takepic.setOnClickListener(this);
         pic.setOnClickListener(this);
+      //  test.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +82,10 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
             case R.id.pic:
                 startActivity(new Intent(StartActivity.this, Dilog.class));
                 break;
+//
+//            case R.id.test:
+//                mExplosionField.explode(v);
+//                break;
             default:
                 break;
         }

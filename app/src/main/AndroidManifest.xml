@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.testview.kevin"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.testview.kevin"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:maxSdkVersion="23"
@@ -38,29 +37,34 @@
     <application
         android:name=".kevinApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
         <activity
             android:name=".StartActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--to do you activity-->
+        <!-- to do you activity -->
         <activity android:name=".activity.HidingScrollToolbar.HidingScrollToolbarActivity"/>
         <activity android:name=".activity.viewpagerfragemnt.MainActivity"/>
         <activity android:name=".activity.ondragActivity.OnDragActivity"/>
         <activity android:name=".activity.createqrcode.CreateQrcodeActivity"/>
         <activity android:name=".activity.zippicture.ZipPicActivity"/>
-        <activity android:name=".activity.activitylikedilog.Dilog"
-            />
+        <activity android:name=".activity.activitylikedilog.Dilog"/>
+        <!--  -->
+        <activity android:name=".activity.ontoucher.OnTouchActivity"/>
+        <activity
+            android:name=".activity.activitylikedilog.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

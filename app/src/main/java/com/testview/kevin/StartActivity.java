@@ -10,6 +10,7 @@ import com.testview.kevin.activity.HidingScrollToolbar.HidingScrollToolbarActivi
 import com.testview.kevin.activity.activitylikedilog.Dilog;
 import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
 import com.testview.kevin.activity.ondragActivity.OnDragActivity;
+import com.testview.kevin.activity.ontoucher.OnTouchActivity;
 import com.testview.kevin.activity.viewpagerfragemnt.MainActivity;
 import com.testview.kevin.activity.zippicture.ZipPicActivity;
 
@@ -23,11 +24,11 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
     private Button createqr;
     private Button takepic;
     private Button pic;
-   // private Button test;
+    private Button onTouch;
 
 
     ////
-  //  private ExplosionField mExplosionField;
+    //  private ExplosionField mExplosionField;
 
     /////
 
@@ -47,7 +48,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         createqr = (Button) findViewById(R.id.createqr);
         takepic = (Button) findViewById(R.id.takepic);
         pic = (Button) findViewById(R.id.pic);
-       // test = (Button) findViewById(R.id.test);
+        onTouch = (Button) findViewById(R.id.onTouch);
 
     }
 
@@ -58,7 +59,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         createqr.setOnClickListener(this);
         takepic.setOnClickListener(this);
         pic.setOnClickListener(this);
-      //  test.setOnClickListener(this);
+        onTouch.setOnClickListener(this);
     }
 
     @Override
@@ -82,10 +83,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
             case R.id.pic:
                 startActivity(new Intent(StartActivity.this, Dilog.class));
                 break;
-//
-//            case R.id.test:
-//                mExplosionField.explode(v);
-//                break;
+            case R.id.onTouch:
+                startActivity(new Intent(StartActivity.this, OnTouchActivity.class));
+                break;
             default:
                 break;
         }

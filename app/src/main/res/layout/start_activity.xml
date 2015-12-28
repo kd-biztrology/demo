@@ -49,11 +49,10 @@
         />
 
     <Button
-        android:id="@+id/test"
+        android:id="@+id/onTouch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="test"
+        android:text="Touch"
         />
 
 

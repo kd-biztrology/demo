@@ -51,7 +51,7 @@ public class test extends PopupWindow {
                 int y = (int) event.getY();
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (y < height) {
-                        dismiss();
+                      //  dismiss();
                     }
                 }
                 return true;

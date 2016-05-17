@@ -5,8 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.testview.kevin.utils.logger.Logger;
-
 
 public class OnDragsItemTouchHelperCallback extends ItemTouchHelper.Callback {
     private static final String TAG = OnDragsItemTouchHelperCallback.class.getSimpleName();

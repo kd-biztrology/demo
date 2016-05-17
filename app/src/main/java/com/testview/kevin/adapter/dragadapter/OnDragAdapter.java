@@ -56,22 +56,16 @@ public class OnDragAdapter extends RecyclerView.Adapter<OnDragAdapter.OnDragView
     public void onBindViewHolder(final OnDragViewHolder holder, final int position) {
         holder.text.setText(datas.get(position));
         //整个item view 的动作
-        holder.handle.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
-                }
-                return false;
+        holder.handle.setOnTouchListener((v, event) -> {
+            if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                mDragStartListener.onStartDrag(holder);
             }
+            return false;
         });
         if (mOnItemClickLitener != null) {
-            holder.mLabeView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int postion = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.mLabeView, position);
-                }
+            holder.mLabeView.setOnClickListener(v -> {
+                int postion = holder.getLayoutPosition();
+                mOnItemClickLitener.onItemClick(holder.mLabeView, position);
             });
         }
     }

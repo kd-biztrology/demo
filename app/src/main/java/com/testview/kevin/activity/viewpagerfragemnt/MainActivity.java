@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
 
     private void initDatas() {
 
-        for (String data : mDatas) {
+        for (String ignored : mDatas) {
             SimpleFragment fragment = new SimpleFragment();
             mTabContents.add(fragment);
         }

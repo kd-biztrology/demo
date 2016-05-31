@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.testview.kevin.activity.BaseActivity;
 import com.testview.kevin.activity.HidingScrollToolbar.HidingScrollToolbarActivity;
 import com.testview.kevin.activity.activitylikedilog.Dilog;
+import com.testview.kevin.activity.bottmonbar.BottomBarActivity;
 import com.testview.kevin.activity.createqrcode.CreateQrcodeActivity;
 import com.testview.kevin.activity.ondragActivity.OnDragActivity;
 import com.testview.kevin.activity.ontoucher.OnTouchActivity;
@@ -25,6 +26,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
     private Button takepic;
     private Button pic;
     private Button onTouch;
+    private Button bottome;
 
 
     ////
@@ -49,6 +51,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         takepic = (Button) findViewById(R.id.takepic);
         pic = (Button) findViewById(R.id.pic);
         onTouch = (Button) findViewById(R.id.onTouch);
+        bottome = (Button) findViewById(R.id.bottome);
 
     }
 
@@ -60,6 +63,7 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
         takepic.setOnClickListener(this);
         pic.setOnClickListener(this);
         onTouch.setOnClickListener(this);
+        bottome.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +89,9 @@ public class StartActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.onTouch:
                 startActivity(new Intent(StartActivity.this, OnTouchActivity.class));
+                break;
+            case R.id.bottome:
+                startActivity(new Intent(StartActivity.this, BottomBarActivity.class));
                 break;
             default:
                 break;

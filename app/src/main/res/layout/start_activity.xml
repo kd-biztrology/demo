@@ -54,6 +54,11 @@
         android:layout_height="wrap_content"
         android:text="Touch"
         />
-
+    <Button
+        android:id="@+id/bottome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Touch"
+        />
 
 </LinearLayout>

@@ -14,4 +14,11 @@
         <item>Nine</item>
     </array>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- 底部栏(tabhost)-->
+    <string name="cap_bb_menu_lessons">我的课程</string>
+    <string name="cap_bb_menu_scheduled">订课</string>
+    <string name="cap_bb_menu_discover">发现</string>
+    <string name="cap_bb_menu_me">个人</string>
+
 </resources>

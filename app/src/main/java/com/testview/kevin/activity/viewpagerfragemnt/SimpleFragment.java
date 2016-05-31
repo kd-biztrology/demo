@@ -76,6 +76,7 @@ public class SimpleFragment extends Fragment {
         //onDrag();
         return view;
     }
+
     // Drag
     private void onDrag() {
         //0则不执行拖动或者滑动

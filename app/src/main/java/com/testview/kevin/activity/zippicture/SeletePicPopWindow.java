@@ -40,18 +40,15 @@ public class SeletePicPopWindow extends PopupWindow {
         this.setBackgroundDrawable(provider);
 
         //
-        mMenuView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int height = mMenuView.findViewById(R.id.pop_layout).getTop();
-                int y = (int) event.getY();
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (y < height) {
-                        dismiss();
-                    }
+        mMenuView.setOnTouchListener((v, event) -> {
+            int height = mMenuView.findViewById(R.id.pop_layout).getTop();
+            int y = (int) event.getY();
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (y < height) {
+                    dismiss();
                 }
-                return true;
             }
+            return true;
         });
     }
 

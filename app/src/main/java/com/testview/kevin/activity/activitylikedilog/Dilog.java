@@ -46,10 +46,7 @@ public class Dilog extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private View.OnClickListener mListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    private View.OnClickListener mListener = v -> {
 
-        }
     };
 }

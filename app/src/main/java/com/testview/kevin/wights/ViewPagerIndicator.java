@@ -277,12 +277,7 @@ public class ViewPagerIndicator extends LinearLayout {
         for (int i = 0; i < cCount; i++) {
             final int j = i;
             View view = getChildAt(i);
-            view.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mViewPager.setCurrentItem(j);
-                }
-            });
+            view.setOnClickListener(v -> mViewPager.setCurrentItem(j));
         }
     }
 
